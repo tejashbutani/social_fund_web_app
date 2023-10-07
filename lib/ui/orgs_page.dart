@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:social_fund_web_app/models/compModel.dart';
 import 'package:social_fund_web_app/models/requestModel.dart';
 import 'package:social_fund_web_app/network/firestoreApis.dart';
+import 'package:social_fund_web_app/ui/apply_page.dart';
 import 'package:social_fund_web_app/utils.dart';
 import 'package:social_fund_web_app/widgets/custom_loader.dart';
 
@@ -204,22 +205,30 @@ class _OrgPageState extends State<OrgPage> {
   }
 
   Widget sponsorItem(CompModel comp) {
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
-      elevation: 6,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ApplyPage(comp, OrgId)),
+        );
+      },
+      child: Card(
         margin: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
-        decoration: BoxDecoration(
-          color: Colors.white,
+        elevation: 6,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
-        alignment: Alignment.center,
-        child: SizedBox(width: 180, child: Image.network(comp.logo)),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          alignment: Alignment.center,
+          child: SizedBox(width: 180, child: Image.network(comp.logo)),
+        ),
       ),
     );
   }

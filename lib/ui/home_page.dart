@@ -24,21 +24,37 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () => buttonOnClicked(true),
-                child: const Text('Orgainser'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+             children: [
+              SizedBox(height: 200, width: MediaQuery.of(context).size.width,),
+              Column(
+                children: [
+                  Text('Social Funds.', style: TextStyle(fontSize: 60, fontWeight: FontWeight.w800),),
+                Text('Your search for funds, ends here.', style: TextStyle(fontSize: 48, fontWeight: FontWeight.w800)),
+                ],
               ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 200,
+                  child: ElevatedButton(
+                    onPressed: () => buttonOnClicked(true),
+                    child: const Text('Looking for sponsors'),
+                  ),
+                ),
+                SizedBox(
+              width: 50,
             ),
-            const SizedBox(
-              width: 100,
-            ),
-            Expanded(
+            SizedBox(
+              width: 200,
               child: ElevatedButton(
                 onPressed: () => buttonOnClicked(false),
-                child: const Text('Company'),
+                child: const Text('Want to Sponsor'),
               ),
+            ),
+              ],
             ),
           ]),
         ),

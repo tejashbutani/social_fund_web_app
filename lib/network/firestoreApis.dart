@@ -1,8 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:social_fund_web_app/models/compModel.dart';
+import 'package:social_fund_web_app/models/orgModel.dart';
 import 'package:social_fund_web_app/models/requestModel.dart';
 
 class FirestoreApis {
+  Future<OrgModel> getOrg(String orgId) async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('requests').doc(orgId).get();
+    if (snapshot.exists) {
+      return OrgModel.fromMap(snapshot.data());
+    } else {
+      return OrgModel("", "", "", "", 0);
+    }
+  }
+
   Future<List<RequestModel>> getOrgRequests(String orgId) async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('requests').where('orgUid', isEqualTo: orgId).get();
@@ -11,7 +21,6 @@ class FirestoreApis {
 
       querySnapshot.docs.forEach((element) {
         reqs.add(RequestModel.fromMap(element.data()));
-        print(element.get('uid'));
       });
 
       return reqs;
@@ -29,7 +38,6 @@ class FirestoreApis {
 
       querySnapshot.docs.forEach((element) {
         comps.add(CompModel.fromMap(element.data()));
-         print(element.get('uid'));
       });
 
       return comps;

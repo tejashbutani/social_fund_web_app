@@ -7,7 +7,7 @@ class OrgModel {
 
   OrgModel(this.uid, this.name, this.email, this.website, this.eventDate);
 
-  factory OrgModel.fromMap(Map<String, dynamic> map) {
+  factory OrgModel.fromMap(map) {
     return OrgModel(
       map['uid'] ?? '',
       map['name'] ?? '',
